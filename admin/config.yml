@@ -1,20 +1,24 @@
-# ตั้งค่า Backend ให้เชื่อมกับ GitHub
+# Backend: กำหนดให้เชื่อมต่อกับ GitHub ผ่านบริการของ Netlify
 backend:
   name: git-gateway
-  branch: main # หรือ master ตาม repository ของคุณ
+  branch: main # หรือ master, ขึ้นอยู่กับสาขาหลักของ repository คุณ
 
-# ที่อยู่ของไฟล์ Media (รูปภาพ)
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+# Media: กำหนดที่จัดเก็บไฟล์รูปภาพที่อัปโหลดผ่านหลังบ้าน
+media_folder: "images/uploads" # ตำแหน่งที่ไฟล์จะถูกเก็บ
+public_folder: "/images/uploads" # ตำแหน่งที่หน้าเว็บจะใช้อ้างอิงถึงรูปภาพ
 
-# "Collections" คือชุดข้อมูลที่เราต้องการให้จัดการได้
+# Collections: คือชุดข้อมูลต่างๆ ที่เราต้องการให้จัดการผ่านหลังบ้านได้
 collections:
-  - name: "services" # ชื่อชุดข้อมูล
-    label: "บริการของเรา" # ชื่อที่แสดงในเมนูหลังบ้าน
-    folder: "_data/services" # โฟลเดอร์ที่เก็บไฟล์
-    create: true # อนุญาตให้สร้างรายการใหม่ได้
-    slug: "{{slug}}" # รูปแบบชื่อไฟล์
-    fields: # รายการช่องข้อมูลที่ให้กรอก
-      - {label: "ชื่อบริการ", name: "title", widget: "string"}
-      - {label: "รายละเอียด", name: "description", widget: "text"}
-      - {label: "รูปภาพประกอบ", name: "image", widget: "image", optional: true}
+  - name: "services" # ชื่อชุดข้อมูล (ต้องไม่ซ้ำกัน)
+    label: "บริการ (Services)" # ชื่อที่แสดงในเมนูของหน้า Admin
+    label_singular: "บริการ (Service)" # ชื่อสำหรับเรียกข้อมูล 1 ชิ้น
+    folder: "_data/services" # โฟลเดอร์ที่จะใช้เก็บไฟล์ข้อมูลของบริการต่างๆ
+    create: true # อนุญาตให้ผู้ใช้สร้างรายการใหม่ได้
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # รูปแบบของชื่อไฟล์ที่จะสร้าง
+    extension: "json" # กำหนดนามสกุลไฟล์เป็น .json
+    format: "json" # กำหนดรูปแบบข้อมูลข้างในเป็น JSON
+    fields: # กำหนดช่องต่างๆ ที่จะให้กรอกข้อมูล
+      - {label: "ชื่อบริการ (Title)", name: "title", widget: "string"}
+      - {label: "รายละเอียด (Description)", name: "description", widget: "text"}
+      - {label: "รูปภาพ (Image)", name: "image", widget: "image", required: false}
+
