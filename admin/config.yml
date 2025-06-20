@@ -1,0 +1,20 @@
+# ตั้งค่า Backend ให้เชื่อมกับ GitHub
+backend:
+  name: git-gateway
+  branch: main # หรือ master ตาม repository ของคุณ
+
+# ที่อยู่ของไฟล์ Media (รูปภาพ)
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# "Collections" คือชุดข้อมูลที่เราต้องการให้จัดการได้
+collections:
+  - name: "services" # ชื่อชุดข้อมูล
+    label: "บริการของเรา" # ชื่อที่แสดงในเมนูหลังบ้าน
+    folder: "_data/services" # โฟลเดอร์ที่เก็บไฟล์
+    create: true # อนุญาตให้สร้างรายการใหม่ได้
+    slug: "{{slug}}" # รูปแบบชื่อไฟล์
+    fields: # รายการช่องข้อมูลที่ให้กรอก
+      - {label: "ชื่อบริการ", name: "title", widget: "string"}
+      - {label: "รายละเอียด", name: "description", widget: "text"}
+      - {label: "รูปภาพประกอบ", name: "image", widget: "image", optional: true}
